@@ -1,4 +1,4 @@
-# Duke User Guide
+# Gigi User Guide
 
 // Update the title above to match the actual product name
 
