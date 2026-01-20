@@ -1,8 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Gigi {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
 
         String logo = "  ________.__       .__ \n" +
                 " /  _____/|__| ____ |__|\n" +
@@ -18,8 +21,13 @@ public class Gigi {
                 System.out.println("Bye. Hope to you see you again soon!");
                 scanner.close();
                 return;
-            } else {
-                System.out.println(input);
+            } else if(input.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println(i+1 + ". " + list.get(i));
+                }
+            }else {
+                list.add(input);
+                System.out.println("added: " + input);
             }
         }
     }
