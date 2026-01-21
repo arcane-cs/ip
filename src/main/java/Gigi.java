@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 
@@ -24,21 +25,45 @@ public class Gigi {
             } else if(input.equals("list")) {
                 System.out.println("Here's your list:");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(i+1 + ". " + list.get(i));
+                    System.out.println("\t"+ (i+1) + ". " + list.get(i));
                 }
             } else {
-                String[] split = input.split(" ");
-                if (split[0].equals("mark")) {
-                    list.get(Integer.parseInt(split[1])-1).markDone();
+                String[] split = input.split(" ", 2);
+                String command = split[0];
+                if (split.length < 2) {
+                    split = new String[]{split[0], ""};
+                }
+                String arguments = split[1];
+                System.out.println(Arrays.toString(split));
+                System.out.println(input);
+                System.out.println(command);
+                if (command.equals("mark")) {
+                    list.get(Integer.parseInt(arguments)-1).markDone();
                     System.out.println("I have marked the task as done:");
-                    System.out.println( list.get(Integer.parseInt(split[1])-1));
-                } else if (split[0].equals("unmark")) {
-                    list.get(Integer.parseInt(split[1])-1).unmarkDone();
+                    System.out.println("\t"+list.get(Integer.parseInt(arguments)-1));
+                } else if (command.equals("unmark")) {
+                    list.get(Integer.parseInt(arguments)-1).unmarkDone();
                     System.out.println("I have unmarked the task as done:");
-                    System.out.println( list.get(Integer.parseInt(split[1])-1));
+                    System.out.println("\t"+list.get(Integer.parseInt(arguments)-1));
                 } else {
-                    list.add(new Task(input));
-                    System.out.println("added: " + input);
+                    Task newTask;
+                    if (command.equals("deadline")) {
+                        String[] a = arguments.split("/by", 2);
+                        newTask = new Deadline(a[0], a[1]);
+                    } else if (command.equals("event")) {
+                        String[] a = arguments.split("/from", 2);
+                        String description = a[0];
+                        a = a[1].split("/to", 2);
+                        newTask = new Event(description, a[0], a[1]);
+                    } else if (command.equals("todo")){
+                        newTask = new Todo(arguments);
+                    } else {
+                        System.out.println("Invalid command :(");
+                        continue;
+                    }
+                    list.add(newTask);
+                    System.out.println("added: \n\t" + newTask);
+                    System.out.println("There are now " + list.size() + " tasks in the list.");
                 }
             }
         }
