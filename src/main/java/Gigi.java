@@ -34,9 +34,6 @@ public class Gigi {
                     split = new String[]{split[0], ""};
                 }
                 String arguments = split[1];
-                System.out.println(Arrays.toString(split));
-                System.out.println(input);
-                System.out.println(command);
                 if (command.equals("mark")) {
                     list.get(Integer.parseInt(arguments)-1).markDone();
                     System.out.println("I have marked the task as done:");
