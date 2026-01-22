@@ -43,6 +43,11 @@ public class Gigi {
                         list.get(Integer.parseInt(arguments)-1).unmarkDone();
                         System.out.println("I have unmarked the task as done:");
                         System.out.println("\t"+list.get(Integer.parseInt(arguments)-1));
+                    } else if (command.equals("delete")) {
+                        Task temp = list.get(Integer.parseInt(arguments)-1);
+                        System.out.println("I have removed the following task:");
+                        System.out.println("\t"+temp);
+                        list.remove(Integer.parseInt(arguments)-1);
                     } else {
                         Task newTask;
                         if (command.equals("deadline")) {
