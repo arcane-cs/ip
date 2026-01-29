@@ -3,6 +3,10 @@ public class Todo extends Task{
         super(task);
     }
 
+    public String serialize() {
+        return "T|" + super.toString();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
