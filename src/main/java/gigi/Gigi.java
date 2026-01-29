@@ -1,3 +1,10 @@
+package gigi;
+
+import gigi.parser.Parser;
+import gigi.storage.Storage;
+import gigi.task.TaskList;
+import gigi.ui.Ui;
+
 import java.util.ArrayList;
 
 public class Gigi {
@@ -5,7 +12,7 @@ public class Gigi {
     private TaskList tasks;
     private Ui ui;
 
-    public Gigi(String filePath) {
+    public Gigi(String filePath) throws GigiException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

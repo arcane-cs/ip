@@ -1,3 +1,10 @@
+package gigi.parser;
+
+import gigi.GigiException;
+import gigi.storage.Storage;
+import gigi.task.*;
+import gigi.ui.Ui;
+
 public class Parser {
     public static void parse(String input, TaskList tasks, Ui ui, Storage storage) throws GigiException {
         try {

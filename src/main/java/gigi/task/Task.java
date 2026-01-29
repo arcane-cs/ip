@@ -1,3 +1,5 @@
+package gigi.task;
+
 public abstract class Task {
     boolean isDone;
     String task;

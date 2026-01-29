@@ -1,3 +1,8 @@
+package gigi.storage;
+
+import gigi.GigiException;
+import gigi.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,23 +31,23 @@ public class Storage {
                 switch (component[0]) {
                     case "D" -> {
                         if (component.length > 3) {
-                            throw new GigiException("Invalid Task from Saved Data");
+                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
                         }
                         tasks.add(new Deadline(component[1], component[2]));
                     }
                     case "E" -> {
                         if (component.length > 4) {
-                            throw new GigiException("Invalid Task from Saved Data");
+                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
                         }
                         tasks.add(new Event(component[1], component[2], component[3]));
                     }
                     case "T" -> {
                         if (component.length > 2) {
-                            throw new GigiException("Invalid Task from Saved Data");
+                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
                         }
                         tasks.add(new Todo(component[1]));
                     }
-                    default -> throw new GigiException("Invalid Task from Saved Data");
+                    default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
                 }
                 if (isDone) {
                     tasks.getLast().markDone();
@@ -53,7 +58,7 @@ public class Storage {
         } catch (GigiException e) {
             System.out.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid Task from Saved Data");
+            System.out.println("Invalid gigi.task.Task from Saved Data");
         }
         return tasks;
     }
