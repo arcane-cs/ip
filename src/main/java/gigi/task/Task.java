@@ -2,7 +2,7 @@ package gigi.task;
 
 public abstract class Task {
     boolean isDone;
-    String task;
+    final String task;
 
     public Task (String task) {
         this.isDone = false;

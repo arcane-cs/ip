@@ -14,8 +14,8 @@ public class TaskList implements Iterable<Task> {
         tasks.add(task);
     }
 
-    public Task deleteTask(int index) {
-        return tasks.remove(index);
+    public void deleteTask(int index) {
+        tasks.remove(index);
     }
 
     public int size() {

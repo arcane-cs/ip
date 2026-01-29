@@ -8,9 +8,9 @@ import gigi.ui.Ui;
 import java.util.ArrayList;
 
 public class Gigi {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Gigi(String filePath) throws GigiException {
         ui = new Ui();
@@ -32,7 +32,7 @@ public class Gigi {
                 if (fullCommand.equals("bye")) {
                     isExit = true;
                 }
-                Parser.parse(fullCommand, tasks, ui, storage);
+                Parser.parse(fullCommand, tasks, ui);
 
             } catch (GigiException e) {
                 ui.showError(e.getMessage());

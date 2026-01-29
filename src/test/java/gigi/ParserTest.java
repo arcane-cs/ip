@@ -34,7 +34,7 @@ public class ParserTest {
         // Non-trivial: Command is "deadline" but lacks the "/by" keyword
         String input = "deadline Submit report by tomorrow";
 
-        Parser.parse(input, tasks, ui, storage);
+        Parser.parse(input, tasks, ui);
 
         assertEquals("Provide a 'by' for your deadline!", ui.getLastMessage());
         assertEquals(0, tasks.size(), "Task should not be added on failure");
@@ -49,7 +49,7 @@ public class ParserTest {
         // Non-trivial: Command has "/from" but is missing the "/to" segment
         String input = "event Career Fair /from Monday 10am";
 
-        Parser.parse(input, tasks, ui, storage);
+        Parser.parse(input, tasks, ui);
 
         assertEquals("Provide a 'to' for your event!", ui.getLastMessage());
         assertEquals(0, tasks.size(), "Task should not be added on failure");

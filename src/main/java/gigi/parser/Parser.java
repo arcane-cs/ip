@@ -1,12 +1,15 @@
 package gigi.parser;
 
 import gigi.GigiException;
-import gigi.storage.Storage;
-import gigi.task.*;
+import gigi.task.Deadline;
+import gigi.task.Task;
+import gigi.task.TaskList;
+import gigi.task.Todo;
+import gigi.task.Event;
 import gigi.ui.Ui;
 
 public class Parser {
-    public static void parse(String input, TaskList tasks, Ui ui, Storage storage) throws GigiException {
+    public static void parse(String input, TaskList tasks, Ui ui) throws GigiException {
         try {
             String[] split = input.split(" ", 2);
             String command = split[0];

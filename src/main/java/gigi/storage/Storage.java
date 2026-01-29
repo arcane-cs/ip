@@ -54,7 +54,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("An error occured while reading data: " + e.getMessage());
+            System.out.println("An error occurred while reading data: " + e.getMessage());
         } catch (GigiException e) {
             System.out.println(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
