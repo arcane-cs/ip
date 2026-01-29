@@ -9,6 +9,16 @@ import gigi.task.Event;
 import gigi.ui.Ui;
 
 public class Parser {
+    /**
+     * Parses the user input and executes the corresponding command.
+     * This method interprets the command word and arguments, modifies the task list
+     * accordingly, and interacts with the UI to provide feedback to the user.
+     *
+     * @param input The full raw string input provided by the user.
+     * @param tasks The TaskList object that will be modified or queried.
+     * @param ui The Ui object used to display success or error messages to the user.
+     * @throws GigiException If the command is invalid or the arguments are malformed.
+     */
     public static void parse(String input, TaskList tasks, Ui ui) throws GigiException {
         try {
             String[] split = input.split(" ", 2);

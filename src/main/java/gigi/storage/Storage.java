@@ -17,6 +17,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task list from the local storage file.
+     * This method reads the file line by line, parses the serialized task data,
+     * and populates a list of tasks.
+     *
+     * @return A list of Task objects retrieved from the file.
+     * @throws GigiException If the file exists but is corrupted or contains invalid data.
+     */
     public List<Task> load() throws GigiException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -63,6 +71,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current tasks in the task list to the local storage file.
+     * The tasks are converted into a serialized string format before being
+     * written to the hard disk to ensure they can be loaded in future sessions.
+     *
+     * @param tasks The TaskList containing the tasks to be persisted.
+     */
     public void save(TaskList tasks) {
         File file = new File(filePath);
         try{
