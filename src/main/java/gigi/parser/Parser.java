@@ -46,6 +46,14 @@ public class Parser {
                     ui.showMessage("I have removed the following task:");
                     ui.showMessage("\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
                     tasks.deleteTask(Integer.parseInt(arguments) - 1);
+                } else if (command.equals("find")) {
+                    String result = tasks.findString(arguments);
+                    if (result.isEmpty()){
+                        ui.showMessage("No matches found");
+                    } else {
+                        ui.showMessage("Here you go:");
+                        ui.showMessage(result);
+                    }
                 } else {
                     Task newTask;
                     if (command.equals("deadline")) {

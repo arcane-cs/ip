@@ -30,6 +30,21 @@ public class TaskList implements Iterable<Task> {
         tasks.get(index).unmarkDone();
     }
 
+    public String findString(String query) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.toString().contains(query)) {
+                sb.append("\t")
+                        .append(i + 1)
+                        .append(". ")
+                        .append(tasks.get(i))
+                        .append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
     public String printList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
