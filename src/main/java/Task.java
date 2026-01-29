@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     boolean isDone;
     String task;
 
@@ -14,6 +14,8 @@ public class Task {
     public void unmarkDone() {
         this.isDone = false;
     }
+
+    public abstract String serialize();
 
     @Override
     public String toString() {
