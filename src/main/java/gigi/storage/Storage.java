@@ -50,7 +50,7 @@ public class Storage {
                     default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
                 }
                 if (isDone) {
-                    tasks.getLast().markDone();
+                    tasks.get(tasks.size()-1).markDone();
                 }
             }
         } catch (IOException e) {
