@@ -1,9 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task{
-    String by;
+    LocalDate by;
 
     public Deadline(String task, String by){
         super(task);
-        this.by = by;
+
+        try {
+            this.by = LocalDate.parse(by.trim());
+        } catch (DateTimeParseException e) {
+            throw new GigiException("Please use the format yyyy-mm-dd (e.g., 2019-01-15)");
+        }
     }
 
     public String serialize() {
@@ -12,6 +21,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by " + this.by + ")";
+        return "[D]" + super.toString() + "(by " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
