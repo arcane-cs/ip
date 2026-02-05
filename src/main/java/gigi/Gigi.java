@@ -44,4 +44,19 @@ public class Gigi {
     public static void main(String[] args) {
         new Gigi("data/gigi.txt").run();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        String response;
+        try {
+            response = Parser.parse(input, tasks, ui);
+
+        } catch (GigiException e) {
+            response = ui.showError(e.getMessage());
+        }
+        storage.save(tasks);
+        return response;
+    }
 }

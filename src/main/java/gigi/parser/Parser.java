@@ -19,16 +19,17 @@ public class Parser {
      * @param ui The Ui object used to display success or error messages to the user.
      * @throws GigiException If the command is invalid or the arguments are malformed.
      */
-    public static void parse(String input, TaskList tasks, Ui ui) throws GigiException {
+    public static String parse(String input, TaskList tasks, Ui ui) throws GigiException {
         try {
             String[] split = input.split(" ", 2);
             String command = split[0];
 
             if (command.equals("bye")) {
-                ui.showMessage("Bye. Hope to you see you again soon!");
+                return ui.showMessage("Bye. Hope to you see you again soon!");
+            } else if (command.equals("hello")) {
+                return ui.showWelcome();
             } else if (command.equals("list")) {
-                ui.showMessage("Here's your list:");
-                ui.showMessage(tasks.printList());
+                return ui.showMessage("Here's your list:\n" + tasks.printList());
             } else {
                 if (split.length < 2) {
                     throw new GigiException("Please give a valid command!");
@@ -36,23 +37,20 @@ public class Parser {
                 String arguments = split[1];
                 if (command.equals("mark")) {
                     tasks.markTask(Integer.parseInt(arguments) - 1);
-                    ui.showMessage("I have marked the task as done:");
-                    ui.showMessage("\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
+                    return ui.showMessage("I have marked the task as done:\n" + "\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
                 } else if (command.equals("unmark")) {
                     tasks.unmarkTask(Integer.parseInt(arguments) - 1);
-                    ui.showMessage("I have unmarked the task as done:");
-                    ui.showMessage("\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
+                    return ui.showMessage("I have unmarked the task as done:\n" + "\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
                 } else if (command.equals("delete")) {
-                    ui.showMessage("I have removed the following task:");
-                    ui.showMessage("\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
+                    String response = ui.showMessage("I have removed the following task:\n" + "\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
                     tasks.deleteTask(Integer.parseInt(arguments) - 1);
+                    return response;
                 } else if (command.equals("find")) {
                     String result = tasks.findString(arguments);
                     if (result.isEmpty()){
-                        ui.showMessage("No matches found");
+                        return ui.showMessage("No matches found");
                     } else {
-                        ui.showMessage("Here you go:");
-                        ui.showMessage(result);
+                        return "Here you go:\n" + ui.showMessage(result);
                     }
                 } else {
                     Task newTask;
@@ -76,19 +74,16 @@ public class Parser {
                     } else if (command.equals("todo")) {
                         newTask = new Todo(arguments);
                     } else {
-                        ui.showMessage("Invalid command :(");
-                        return;
+                        return ui.showMessage("Invalid command :(");
                     }
                     tasks.addTask(newTask);
-                    ui.showMessage("added: \n\t" + newTask);
-                    ui.showMessage("There are now " + tasks.size() + " tasks in the list.");
+                    return ui.showMessage("added: \n\t" + newTask + "\n" + "There are now " + tasks.size() + " tasks in the list.");
                 }
             }
         } catch (GigiException e) {
-            ui.showMessage(e.getMessage());
+            return ui.showMessage(e.getMessage());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            ui.showMessage("Give a valid index!");
-            tasks.printList();
+            return ui.showMessage("Give a valid index!\n" + tasks.printList());
         }
     }
 }

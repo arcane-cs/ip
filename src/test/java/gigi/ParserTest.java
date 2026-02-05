@@ -16,8 +16,8 @@ public class ParserTest {
         private String lastMessage;
 
         @Override
-        public void showMessage(String m) {
-            this.lastMessage = m;
+        public String showMessage(String m) {
+            return this.lastMessage = m;
         }
 
         public String getLastMessage() {
