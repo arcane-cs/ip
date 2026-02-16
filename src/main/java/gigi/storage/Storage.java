@@ -57,6 +57,7 @@ public class Storage {
                     }
                     default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
                 }
+
                 if (isDone) {
                     tasks.get(tasks.size()-1).markDone();
                 }
@@ -80,7 +81,7 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         File file = new File(filePath);
-        try{
+        try {
             file.getParentFile().mkdirs();
             file.createNewFile();
 

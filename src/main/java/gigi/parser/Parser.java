@@ -34,7 +34,10 @@ public class Parser {
                 if (split.length < 2) {
                     throw new GigiException("Please give a valid command!");
                 }
+
                 String arguments = split[1];
+                assert arguments != null;
+
                 if (command.equals("mark")) {
                     tasks.markTask(Integer.parseInt(arguments) - 1);
                     return ui.showMessage("I have marked the task as done:\n" + "\t" + tasks.printTask(Integer.parseInt(arguments) - 1));
