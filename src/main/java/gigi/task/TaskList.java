@@ -15,7 +15,9 @@ public class TaskList implements Iterable<Task> {
     }
 
     public void deleteTask(int index) {
+        int oldSize = tasks.size();
         tasks.remove(index);
+        assert tasks.size() == oldSize - 1;
     }
 
     public int size() {
@@ -23,6 +25,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     public void markTask(int index) {
+        assert index >= 0;
+        assert index < tasks.size();
         tasks.get(index).markDone();
     }
 
