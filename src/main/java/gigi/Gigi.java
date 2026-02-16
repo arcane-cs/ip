@@ -26,6 +26,7 @@ public class Gigi {
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -50,12 +51,13 @@ public class Gigi {
      */
     public String getResponse(String input) {
         String response;
+
         try {
             response = Parser.parse(input, tasks, ui);
-
         } catch (GigiException e) {
             response = ui.showError(e.getMessage());
         }
+
         storage.save(tasks);
         return response;
     }

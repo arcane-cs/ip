@@ -38,7 +38,7 @@ test {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "gigi"
     archiveClassifier = null
 }
 
