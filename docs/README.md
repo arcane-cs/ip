@@ -41,6 +41,7 @@ Gigi is a personal assistant chatbot designed to help users track tasks through 
 7. **Exit Program**
 
     `bye`: Closes the application.
+   
 ## Data Storage
 
 The application automatically saves your tasks to the local hard drive. This ensures that your list is preserved even after closing the program.
