@@ -5,6 +5,13 @@ public class Todo extends Task{
         super(task);
     }
 
+    public Todo(String task, String tags) {
+        super(task);
+        for (String tag: tags.split(", ")) {
+            addTag(tag);
+        }
+    }
+
     /**
      * Converts the task into a simplified string format suitable for file storage.
      * The format typically includes the task type, completion status, description,
@@ -13,11 +20,11 @@ public class Todo extends Task{
      * @return A formatted string representing the task for persistent storage.
      */
     public String serialize() {
-        return "T|" + super.toString();
+        return "T|" + super.toString() + "|" + getTag();
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n\tTags: " + getTag();
     }
 }

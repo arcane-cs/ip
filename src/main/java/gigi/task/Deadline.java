@@ -19,6 +19,19 @@ public class    Deadline extends Task{
         }
     }
 
+    public Deadline(String task, String by, String tags){
+        super(task);
+
+        try {
+            this.by = LocalDate.parse(by.trim());
+            for (String tag: tags.split(", ")) {
+                addTag(tag);
+            }
+        } catch (DateTimeParseException e) {
+            throw new GigiException("Please use the format yyyy-mm-dd (e.g., 2019-01-15)");
+        }
+    }
+
     /**
      * Converts the task into a simplified string format suitable for file storage.
      * The format typically includes the task type, completion status, description,
@@ -27,11 +40,12 @@ public class    Deadline extends Task{
      * @return A formatted string representing the task for persistent storage.
      */
     public String serialize() {
-        return "D|" + super.toString() + "|" + this.by;
+        return "D|" + super.toString() + "|" + this.by + "|" + getTag();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + " (by " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" +
+                "\n\tTags: " + getTag();
     }
 }

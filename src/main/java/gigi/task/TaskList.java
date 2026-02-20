@@ -61,6 +61,14 @@ public class TaskList implements Iterable<Task> {
         return sb.toString();
     }
 
+    public void addTag(int index, String tag) {
+        tasks.get(index).addTag(tag);
+    }
+
+    public void removeTag(int index, String tag) {
+        tasks.get(index).removeTag(tag);
+    }
+
     public String printTask(int index) {
         return tasks.get(index).toString();
     }

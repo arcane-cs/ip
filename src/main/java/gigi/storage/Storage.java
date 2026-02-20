@@ -38,22 +38,31 @@ public class Storage {
                 component[1] = component[1].substring(4);
                 switch (component[0]) {
                     case "D" -> {
-                        if (component.length > 3) {
-                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
-                        }
-                        tasks.add(new Deadline(component[1], component[2]));
-                    }
-                    case "E" -> {
                         if (component.length > 4) {
                             throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                        } else if (component.length == 3) {
+                            tasks.add(new Deadline(component[1], component[2]));
+                        } else {
+                            tasks.add(new Deadline(component[1], component[2], component[3]));
                         }
-                        tasks.add(new Event(component[1], component[2], component[3]));
+                    }
+                    case "E" -> {
+                        if (component.length > 5) {
+                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                        } else if (component.length == 4) {
+                            tasks.add(new Event(component[1], component[2], component[3]));
+                        } else {
+                            tasks.add(new Event(component[1], component[2], component[3], component[4]));
+                        }
                     }
                     case "T" -> {
-                        if (component.length > 2) {
+                        if (component.length > 3) {
                             throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                        } else if (component.length == 2) {
+                            tasks.add(new Todo(component[1]));
+                        } else {
+                            tasks.add(new Todo(component[1], component[2]));
                         }
-                        tasks.add(new Todo(component[1]));
                     }
                     default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
                 }

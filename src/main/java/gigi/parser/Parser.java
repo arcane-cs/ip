@@ -36,12 +36,29 @@ public class Parser {
                 case "find" -> handleFind(arguments, tasks, ui);
                 case "mark", "unmark", "delete" -> handleTaskAugmentation(command, arguments, tasks, ui);
                 case "todo", "deadline", "event" -> handleAddTask(command, arguments, tasks, ui);
+                case "tag" -> handleTag(arguments, tasks);
                 default -> ui.showMessage("Invalid command :(");
             };
         } catch (GigiException e) {
             return ui.showMessage(e.getMessage());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             return ui.showMessage("Give a valid index!\n" + tasks.printList());
+        }
+    }
+
+    private static String handleTag(String args, TaskList tasks) {
+        String[] parts = args.split(" ", 3);
+        String action = parts[0];
+        int idx = Integer.parseInt(parts[1]) - 1;
+        String tag = parts[2];
+        if (action.equals("add")) {
+            tasks.addTag(idx, tag);
+            return "Added Tag!";
+        } else if (action.equals("remove")) {
+            tasks.removeTag(idx, tag);
+            return "Removed Tag...";
+        } else {
+            return "Invalid Tag Action!";
         }
     }
 
