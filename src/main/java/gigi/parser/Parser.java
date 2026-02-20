@@ -30,14 +30,14 @@ public class Parser {
             String arguments = split.length < 2 ? "" : split[1].trim();
 
             return switch (command) {
-                case "bye" -> ui.showMessage("Bye. Hope to you see you again soon!");
-                case "hello" -> ui.showWelcome();
-                case "list" -> ui.showMessage("Here's your list:\n" + tasks.printList());
-                case "find" -> handleFind(arguments, tasks, ui);
-                case "mark", "unmark", "delete" -> handleTaskAugmentation(command, arguments, tasks, ui);
-                case "todo", "deadline", "event" -> handleAddTask(command, arguments, tasks, ui);
-                case "tag" -> handleTag(arguments, tasks);
-                default -> ui.showMessage("Invalid command :(");
+            case "bye" -> ui.showMessage("Bye. Hope to you see you again soon!");
+            case "hello" -> ui.showWelcome();
+            case "list" -> ui.showMessage("Here's your list:\n" + tasks.printList());
+            case "find" -> handleFind(arguments, tasks, ui);
+            case "mark", "unmark", "delete" -> handleTaskAugmentation(command, arguments, tasks, ui);
+            case "todo", "deadline", "event" -> handleAddTask(command, arguments, tasks, ui);
+            case "tag" -> handleTag(arguments, tasks);
+            default -> ui.showMessage("Invalid command :(");
             };
         } catch (GigiException e) {
             return ui.showMessage(e.getMessage());
@@ -97,10 +97,10 @@ public class Parser {
         }
 
         Task newTask = switch (command) {
-            case "todo" -> new Todo(args);
-            case "deadline" -> createDeadline(args);
-            case "event" -> createEvent(args);
-            default -> throw new GigiException("Unexpected task type.");
+        case "todo" -> new Todo(args);
+        case "deadline" -> createDeadline(args);
+        case "event" -> createEvent(args);
+        default -> throw new GigiException("Unexpected task type.");
         };
 
         tasks.addTask(newTask);

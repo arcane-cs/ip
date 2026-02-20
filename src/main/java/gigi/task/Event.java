@@ -1,16 +1,26 @@
 package gigi.task;
 
-import gigi.GigiException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
-    LocalDate from;
-    LocalDate to;
+import gigi.GigiException;
 
-    public Event(String task, String from, String to){
+/**
+ * Represents an event task with a start and end date.
+ */
+public class Event extends Task {
+    private final LocalDate from;
+    private final LocalDate to;
+
+    /**
+     * Constructs an Event with description, start date, and end date.
+     * @param task Task description.
+     * @param from Start date in yyyy-mm-dd format.
+     * @param to End date in yyyy-mm-dd format.
+     * @throws GigiException If date parsing fails.
+     */
+    public Event(String task, String from, String to) {
         super(task);
         try {
             this.from = LocalDate.parse(from.trim());
@@ -20,7 +30,15 @@ public class Event extends Task{
         }
     }
 
-    public Event(String task, String from, String to, String tags){
+    /**
+     * Constructs an Event with description, start date, end date, and tags.
+     * @param task Task description.
+     * @param from Start date in yyyy-mm-dd format.
+     * @param to End date in yyyy-mm-dd format.
+     * @param tags Comma-separated tags.
+     * @throws GigiException If date parsing fails.
+     */
+    public Event(String task, String from, String to, String tags) {
         super(task);
         try {
             this.from = LocalDate.parse(from.trim());
@@ -46,7 +64,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) +
-                " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" + "\n\tTags: " + getTag();
+        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" + "\n\tTags: " + getTag();
     }
 }

@@ -2,17 +2,19 @@ package gigi.ui;
 
 import java.util.Scanner;
 
+/**
+ * Handles user interactions for the Gigi application.
+ * Provides methods to read input from the console and format messages for the display.
+ */
 public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Returns a welcome message and the application logo.
+     * @return The welcome greeting string.
+     */
     public String showWelcome() {
-        String logo = "  ________.__       .__ \n" +
-                " /  _____/|__| ____ |__|\n" +
-                "/   \\  ___|  |/ ___\\|  |\n" +
-                "\\    \\_\\  \\  / /_/  >  |\n" +
-                " \\______  /__\\___  /|__|\n" +
-                "        \\/  /_____/     ";
-        return "Hello from\n" + "What can I do for you?";
+        return "Hello from\nWhat can I do for you?";
     }
 
     public String readCommand() {

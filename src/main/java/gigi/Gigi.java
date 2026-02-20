@@ -1,17 +1,26 @@
 package gigi;
 
+import java.util.ArrayList;
+
 import gigi.parser.Parser;
 import gigi.storage.Storage;
 import gigi.task.TaskList;
 import gigi.ui.Ui;
 
-import java.util.ArrayList;
-
+/**
+ * Main logic class for the Gigi chatbot.
+ * Coordinates the storage, task list, and user interface components.
+ */
 public class Gigi {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initializes the chatbot by loading data from a specified file path.
+     * @param filePath Path to the storage file.
+     * @throws GigiException If initialization fails.
+     */
     public Gigi(String filePath) throws GigiException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +32,9 @@ public class Gigi {
         }
     }
 
+    /**
+     * Starts the command-line interface loop.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -42,12 +54,19 @@ public class Gigi {
         }
     }
 
+    /**
+     * Entry point for the command-line application.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         new Gigi("data/gigi.txt").run();
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Processes user input and returns a response string for the GUI.
+     * Saves the current task list state after processing.
+     * @param input User message.
+     * @return Bot response message.
      */
     public String getResponse(String input) {
         String response;

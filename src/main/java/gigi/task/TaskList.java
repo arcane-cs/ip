@@ -3,6 +3,10 @@ package gigi.task;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Manages a list of tasks and provides methods to manipulate and query them.
+ * Implements {@code Iterable<Task>} to allow for easy iteration over the task collection.
+ */
 public class TaskList implements Iterable<Task> {
     private final List<Task> tasks;
 
@@ -14,6 +18,10 @@ public class TaskList implements Iterable<Task> {
         tasks.add(task);
     }
 
+    /**
+     * Deletes a task at the specified index.
+     * @param index The index of the task to be removed.
+     */
     public void deleteTask(int index) {
         int oldSize = tasks.size();
         tasks.remove(index);
@@ -24,6 +32,10 @@ public class TaskList implements Iterable<Task> {
         return tasks.size();
     }
 
+    /**
+     * Marks the task at the specified index as done.
+     * @param index The index of the task.
+     */
     public void markTask(int index) {
         assert index >= 0;
         assert index < tasks.size();
@@ -34,6 +46,11 @@ public class TaskList implements Iterable<Task> {
         tasks.get(index).unmarkDone();
     }
 
+    /**
+     * Searches for tasks containing the query string in their description or tags.
+     * @param query The search string.
+     * @return A formatted string of matching tasks.
+     */
     public String findString(String query) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -49,6 +66,10 @@ public class TaskList implements Iterable<Task> {
         return sb.toString();
     }
 
+    /**
+     * Returns a formatted string representation of all tasks in the list.
+     * @return A numbered list of tasks.
+     */
     public String printList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -77,5 +98,4 @@ public class TaskList implements Iterable<Task> {
     public Iterator<Task> iterator() {
         return tasks.iterator();
     }
-
 }

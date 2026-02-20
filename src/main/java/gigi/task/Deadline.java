@@ -1,15 +1,28 @@
 package gigi.task;
 
-import gigi.GigiException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class    Deadline extends Task{
-    LocalDate by;
+import gigi.GigiException;
 
-    public Deadline(String task, String by){
+/**
+ *  Handles Tasks with a 'by' parameter
+ */
+public class Deadline extends Task {
+    private final LocalDate by;
+
+    /**
+     * Constructs a new Deadline task with a specified description and due date.
+     * This constructor attempts to parse the provided date string into a LocalDate.
+     * If the string does not conform to the format (yyyy-mm-dd), a
+     * GigiException is thrown with a descriptive error message.
+     *
+     * @param task The description of the task.
+     * @param by The due date string in the format "yyyy-mm-dd".
+     * @throws GigiException If the provided date string is not in the correct format.
+     */
+    public Deadline(String task, String by) {
         super(task);
 
         try {
@@ -19,7 +32,16 @@ public class    Deadline extends Task{
         }
     }
 
-    public Deadline(String task, String by, String tags){
+    /**
+     * Constructs a Deadline task with a description, a due date, and initial tags.
+     * The due date must follow the format (yyyy-mm-dd).
+     *
+     * @param task The description of the task.
+     * @param by The due date string (e.g., "2026-11-20").
+     * @param tags A comma-separated string of tags to be assigned (e.g., "urgent, school").
+     * @throws GigiException If the date string format is invalid.
+     */
+    public Deadline(String task, String by, String tags) {
         super(task);
 
         try {
@@ -45,7 +67,7 @@ public class    Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")" +
-                "\n\tTags: " + getTag();
+        return "[D]" + super.toString() + " (by " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")"
+                + "\n\tTags: " + getTag();
     }
 }

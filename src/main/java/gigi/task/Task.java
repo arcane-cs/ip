@@ -3,12 +3,20 @@ package gigi.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract class for tasks created by the user
+ */
 public abstract class Task {
-    boolean isDone;
-    final String task;
-    List<String> tags;
+    private boolean isDone;
+    private final String task;
+    private final List<String> tags;
 
-    public Task (String task) {
+    /**
+     * Constructs a new Task with a description and initializes it as not done.
+     * @param task The description of the task
+     * @throws IllegalArgumentException If the task description is empty.
+     */
+    public Task(String task) {
         this.isDone = false;
         if (task.isEmpty()) {
             throw new IllegalArgumentException();

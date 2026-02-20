@@ -1,11 +1,11 @@
 package gigi.ui;
 
-import gigi.Gigi;
+import java.util.Objects;
 
+import gigi.Gigi;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,13 +23,13 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Gigi gigi;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/grem.jpg"));
-    private Image gigiImage = new Image(this.getClass().getResourceAsStream("/images/gg.jpg"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/grem.jpg")));
+    private final Image gigiImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/gg.jpg")));
 
     @FXML
     public void initialize() {

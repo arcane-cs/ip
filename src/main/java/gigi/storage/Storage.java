@@ -1,8 +1,5 @@
 package gigi.storage;
 
-import gigi.GigiException;
-import gigi.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +7,17 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import gigi.GigiException;
+import gigi.task.Deadline;
+import gigi.task.Event;
+import gigi.task.Task;
+import gigi.task.TaskList;
+import gigi.task.Todo;
+
+/**
+ * Handles the interactions between the task manager
+ * and User storage
+ */
 public class Storage {
     private final String filePath;
 
@@ -37,38 +45,38 @@ public class Storage {
                 boolean isDone = component[1].startsWith("[X]");
                 component[1] = component[1].substring(4);
                 switch (component[0]) {
-                    case "D" -> {
-                        if (component.length > 4) {
-                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
-                        } else if (component.length == 3) {
-                            tasks.add(new Deadline(component[1], component[2]));
-                        } else {
-                            tasks.add(new Deadline(component[1], component[2], component[3]));
-                        }
+                case "D" -> {
+                    if (component.length > 4) {
+                        throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                    } else if (component.length == 3) {
+                        tasks.add(new Deadline(component[1], component[2]));
+                    } else {
+                        tasks.add(new Deadline(component[1], component[2], component[3]));
                     }
-                    case "E" -> {
-                        if (component.length > 5) {
-                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
-                        } else if (component.length == 4) {
-                            tasks.add(new Event(component[1], component[2], component[3]));
-                        } else {
-                            tasks.add(new Event(component[1], component[2], component[3], component[4]));
-                        }
+                }
+                case "E" -> {
+                    if (component.length > 5) {
+                        throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                    } else if (component.length == 4) {
+                        tasks.add(new Event(component[1], component[2], component[3]));
+                    } else {
+                        tasks.add(new Event(component[1], component[2], component[3], component[4]));
                     }
-                    case "T" -> {
-                        if (component.length > 3) {
-                            throw new GigiException("Invalid gigi.task.Task from Saved Data");
-                        } else if (component.length == 2) {
-                            tasks.add(new Todo(component[1]));
-                        } else {
-                            tasks.add(new Todo(component[1], component[2]));
-                        }
+                }
+                case "T" -> {
+                    if (component.length > 3) {
+                        throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                    } else if (component.length == 2) {
+                        tasks.add(new Todo(component[1]));
+                    } else {
+                        tasks.add(new Todo(component[1], component[2]));
                     }
-                    default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
+                }
+                default -> throw new GigiException("Invalid gigi.task.Task from Saved Data");
                 }
 
                 if (isDone) {
-                    tasks.get(tasks.size()-1).markDone();
+                    tasks.get(tasks.size() - 1).markDone();
                 }
             }
         } catch (IOException e) {
@@ -96,7 +104,7 @@ public class Storage {
 
             try (FileWriter writer = new FileWriter(file)) {
                 for (Task task : tasks) {
-                    writer.write(task.serialize()+"\n");
+                    writer.write(task.serialize() + "\n");
                 }
             }
         } catch (IOException e) {

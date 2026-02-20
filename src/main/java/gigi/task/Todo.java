@@ -1,10 +1,22 @@
 package gigi.task;
 
-public class Todo extends Task{
+/**
+ * Represents a simple todo task without any date or time constraints.
+ */
+public class Todo extends Task {
+    /**
+     * Constructs a Todo task with a description.
+     * @param task The description of the task.
+     */
     public Todo(String task) {
         super(task);
     }
 
+    /**
+     * Constructs a Todo task with a description and initial tags.
+     * @param task The description of the task.
+     * @param tags A comma-separated string of tags.
+     */
     public Todo(String task, String tags) {
         super(task);
         for (String tag: tags.split(", ")) {
