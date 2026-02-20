@@ -10,6 +10,9 @@ public abstract class Task {
 
     public Task (String task) {
         this.isDone = false;
+        if (task.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.task = task;
         this.tags = new ArrayList<>();
     }
