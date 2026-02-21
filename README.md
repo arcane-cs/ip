@@ -1,6 +1,6 @@
 # Gigi User Guide
 
-![Gigi Screenshot](Ui.png)
+![Gigi Screenshot](./docs/Ui.png)
 
 ## Overview
 
